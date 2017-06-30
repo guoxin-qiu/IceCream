@@ -1,0 +1,8 @@
+# Simple Vue Sample #
+
+## References ##
+
+- [vuejs installation](http://vuejs.org/v2/guide/installation.html)
+- [runoob](http://www.runoob.com/vue2/vue-tutorial.html)
+- [https://unpkg.com/vue/dist/vue.js](https://unpkg.com/vue/dist/vue.js)
+- [www.htmleaf.com](http://www.htmleaf.com/)
