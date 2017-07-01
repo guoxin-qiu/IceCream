@@ -10,6 +10,9 @@ require.config({
         'vue': ['vue/dist/vue'],
         'mockjax': ['mockjax/dist/jquery.mockjax'],
         'ajax-mock': ['../js/libs/ajax-mock'],
-        'ajax': ['../js/libs/ajax-helper']
+        'ajax': ['../js/libs/ajax-helper'],
+
+        'header':['../js/vue-modules/header'],
+        'footer':['../js/vue-modules/footer'],
     }
 });

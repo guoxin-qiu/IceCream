@@ -1,31 +1,29 @@
 require(['./libs/require-config'], function () {
     require(['vue', 'ajax'], function (Vue, ajax) {
         new Vue({
-            el: "#app",
+            el: '#app',
             data: {
                 username: '',
                 password: '',
                 rememberMe: false,
-                content: {
-                    placeholder_username: '请输入用户名或电子邮件',
-                    placeholder_password: '请输入密码',
-                    rememberMe: 'Remember me'
-                }
+                message: ''
             },
             methods: {
                 login: function () {
-                    if (this.username.length == 0 || this.password.length == 0) {
-                        alert('用户名和密码不能为空');
+                    var _self = this;
+                    if (_self.username.length == 0 || _self.password.length == 0) {
+                        _self.message = '用户名和密码不能为空';
                         return;
                     }
                     ajax.get('/Account/Login', {
-                        username: this.username,
-                        password: this.password
+                        username: _self.username,
+                        password: _self.password
                     }, function (response) {
-                        if(response.LoginSuccess){
-                            alert('登录成功');
-                        }else{
-                            alert('用户名或密码错误，请重新输入');
+                        if (response.LoginSuccess) {
+                            window.localStorage.setItem('$username', _self.username);
+                            window.location.href = 'index.html';
+                        } else {
+                            _self.message = '用户名或密码错误，请重新输入';
                         }
                     });
                 }
