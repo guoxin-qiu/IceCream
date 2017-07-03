@@ -12,19 +12,35 @@
 </head>
 
 <body>
+    <div class="loading-div">
+        <img alt="loading" class="loading-img" src="images/loading.gif" />
+    </div>
     <div id="header">
         <bonbonniere-header></bonbonniere-header>
     </div>
     <div class="container body-content">
         <div id="content">
             <p v-text="message"></p>
+
+            <table class="table">
+                <thead>
+                    <th v-for="col in columns" v-text="col"></th>
+                </thead>
+                <tbody>
+                    <tr v-for="user in users">
+                        <td><a :href="getHref(user.Id)" v-text="user.Username"></a></td>
+                        <td v-text="user.FullName"></td>
+                        <td v-text="user.Email"></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <hr />
         <div id="footer">
             <bonbonniere-footer></bonbonniere-footer>
         </div>
     </div>
-    <script data-main="js/index" src="vendor/requirejs/dist/require.js"></script>
+    <script data-main="js/index.js" src="vendor/requirejs/dist/require.js"></script>
 </body>
 
 </html>
