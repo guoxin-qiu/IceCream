@@ -9,14 +9,19 @@ define([], function () {
             return JSON.parse(storage.getItem(userInfoKey));
         } catch (ex) {
             return {
-                username: ''
+                username: '',
+                fullName: '',
+                email: ''
             };
         }
     }
 
-    function setUserInfo(username) {
-        var userInfo = {username: username || ''};
-        storage.setItem(userInfoKey, JSON.stringify(userInfo));
+    function setUserInfo(userInfo) {
+        if(!userInfo){
+            throw new Error('Argument can not be null.');
+        }
+        var user = {username: userInfo.Username,fullName: userInfo.FullName, email: userInfo.Email};
+        storage.setItem(userInfoKey, JSON.stringify(user));
     }
 
     function removeUserInfo() {

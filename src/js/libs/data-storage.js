@@ -25,27 +25,27 @@ define([], function () {
             add: function (item) {
                 let list = this.getAll();
                 for (let i = 0; i < list.length; i++) {
-                    if (list[i].key === item.key) {
-                        throw new Error('Duplicate key with ' + item.key);
+                    if (list[i].Id === item.Id) {
+                        throw new Error('Duplicate Id with ' + item.Id);
                     }
                 }
                 list.push(item);
                 _setStorage(list);
             },
-            update: function (key, itemForUpdate) {
+            update: function (id, itemForUpdate) {
                 let list = this.getAll();
                 for (let i = 0; i < list.length; i++) {
-                    if (list[i].key === key) {
+                    if (list[i].Id === id) {
                         list[i] = itemForUpdate;
                         return false;
                     }
                 }
                 _setStorage(list);
             },
-            delete: function (key) {
+            delete: function (id) {
                 let list = this.getAll();
                 for (let i = 0; i < list.count; i++) {
-                    if (list[i].key === key) {
+                    if (list[i].Id === id) {
                         list.split(i, 1);
                         return false;
                     }
