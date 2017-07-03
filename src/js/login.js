@@ -1,5 +1,5 @@
 require(['./libs/require-config'], function () {
-    require(['vue', 'ajax'], function (Vue, ajax) {
+    require(['vue', 'ajax','auth-storage'], function (Vue, ajax, storage) {
         new Vue({
             el: '#app',
             data: {
@@ -20,7 +20,8 @@ require(['./libs/require-config'], function () {
                         password: _self.password
                     }, function (response) {
                         if (response.LoginSuccess) {
-                            window.localStorage.setItem('$username', _self.username);
+
+                            storage.setUserInfo(_self.username);
                             window.location.href = 'index.html';
                         } else {
                             _self.message = '用户名或密码错误，请重新输入';

@@ -1,10 +1,10 @@
-define(['vue'], function (Vue) {
+define(['vue','auth-storage'], function (Vue, storage) {
     var data = {
         menus: [{
             name: "首页",
             url: "./index.html",
         }],
-        username: window.localStorage.getItem('$username')
+        username: storage.getUserInfo().username
     };
     var header = Vue.extend({
         template: ' <nav class="navbar navbar-inverse navbar-fixed-top">\
@@ -27,13 +27,12 @@ define(['vue'], function (Vue) {
         },
         methods: {
             logoff: function () {
-                window.localStorage.removeItem('$username');
+                storage.removeUserInfo();
                 window.location.href = 'login.html';
             }
         },
         beforeCreate() {
-            var username = window.localStorage.getItem('$username');
-            if (username == null || username.length === 0) {
+            if (!storage.getUserInfo().username) {
                 window.location.href = 'login.html';
             }
         }

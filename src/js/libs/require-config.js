@@ -1,18 +1,19 @@
 require.config({
-    baseUrl: 'vendor/',
+    baseUrl: 'js/libs',
     shim: {
         'vue': {
             exports: 'vue'
         }
     },
     paths: {
-        'jquery': ['jquery/dist/jquery'],
-        'vue': ['vue/dist/vue'],
-        'mockjax': ['mockjax/dist/jquery.mockjax'],
-        'ajax-mock': ['../js/libs/ajax-mock'],
-        'ajax': ['../js/libs/ajax-helper'],
+        'jquery': ['../../vendor/jquery/dist/jquery'],
+        'vue': ['../../vendor/vue/dist/vue'],
+        'mockjax': ['../../vendor/mockjax/dist/jquery.mockjax'],
+        'ajax-mock': ['ajax-mock'],
+        'ajax': ['ajax-helper'],
+        'auth-storage':['auth-storage'],
 
-        'header':['../js/vue-modules/header'],
-        'footer':['../js/vue-modules/footer'],
+        'header':['../vue-modules/header'],
+        'footer':['../vue-modules/footer'],
     }
 });
