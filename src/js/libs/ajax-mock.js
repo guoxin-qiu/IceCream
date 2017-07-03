@@ -1,12 +1,12 @@
 // https://github.com/jakerella/jquery-mockjax
-define(['jquery', 'mockjax', 'data-storage', 'linqjs'], function ($, mockjax, database, linqjs) {
+define(['jquery', 'mockjax', 'data-storage', 'database-init', 'linqjs'], function ($, mockjax, db, dbInit, linqjs) {
     'use strict';
 
     mockjax({
         url: '/Account/Login',
         responseTime: [300, 600],
         response: function (settings) {
-            var user = linqjs.From(database.User.getAll()).FirstOrDefault(null, function (x) {
+            var user = linqjs.From(db.User.getAll()).FirstOrDefault(null, function (x) {
                 return x.username === settings.data.username
             });
             if (user) {

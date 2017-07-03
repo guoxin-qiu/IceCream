@@ -13,9 +13,11 @@ require.config({
 
         'ajax-mock': ['ajax-mock'],
         'ajax': ['ajax-helper'],
-        'auth-storage':['auth-storage'],
+        'auth-storage': ['auth-storage'],
+        'data-storage': ['data-storage'],
+        'database-init': ['database-init'],
 
-        'header':['../vue-modules/header'],
-        'footer':['../vue-modules/footer'],
+        'header': ['../vue-modules/header'],
+        'footer': ['../vue-modules/footer'],
     }
 });
