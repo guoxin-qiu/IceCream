@@ -4,7 +4,7 @@ define(['jquery', 'mockjax', 'data-storage', 'database-init', 'linqjs'], functio
     var responseTime = [300,500];
     mockjax({
         url: '/Account/Login',
-        responseTime: responseTime,
+        // responseTime: responseTime,
         response: function (settings) {
             var user = linqjs.From(db.User.getAll()).FirstOrDefault(null, function (x) {
                 return x.Username === settings.data.username
@@ -25,7 +25,6 @@ define(['jquery', 'mockjax', 'data-storage', 'database-init', 'linqjs'], functio
     });
     mockjax({
         url: '/User',
-        responseTime: [8000,12000],
         response: function(settings){
             var users = db.User.getAll();
             this.responseText = {

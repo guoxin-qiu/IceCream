@@ -6,21 +6,31 @@ define([], function () {
 
     function getUserInfo() {
         try {
-            return JSON.parse(storage.getItem(userInfoKey));
+            var user = storage.getItem(userInfoKey);
+            if (user) {
+                return JSON.parse(user);
+            } else {
+                return {
+                    username: '',
+                    fullName: '',
+                    email: ''
+                };
+            }
+
         } catch (ex) {
-            return {
-                username: '',
-                fullName: '',
-                email: ''
-            };
+            throw new Error(ex);
         }
     }
 
     function setUserInfo(userInfo) {
-        if(!userInfo){
+        if (!userInfo) {
             throw new Error('Argument can not be null.');
         }
-        var user = {username: userInfo.Username,fullName: userInfo.FullName, email: userInfo.Email};
+        var user = {
+            username: userInfo.Username,
+            fullName: userInfo.FullName,
+            email: userInfo.Email
+        };
         storage.setItem(userInfoKey, JSON.stringify(user));
     }
 
