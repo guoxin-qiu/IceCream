@@ -20,20 +20,31 @@
     </div>
     <div class="container body-content">
         <div id="content">
-            <p v-text="message"></p>
-
-            <table class="table">
-                <thead>
-                    <th v-for="col in columns" v-text="col"></th>
-                </thead>
-                <tbody>
-                    <tr v-for="user in users">
-                        <td><a :href="getHref(user.Id)" v-text="user.Username"></a></td>
-                        <td v-text="user.FullName"></td>
-                        <td v-text="user.Email"></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div>
+                <ul class="nav nav-tabs">
+                    <li :class="{active:tabIndex==1}" @click="tabIndex=1"><a href="#welcome">Welcome</a></li>
+                    <li :class="{active:tabIndex==2}" @click="tabIndex=2"><a href="#users">Users</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane" :class="{active:tabIndex==1}">
+                        <p v-text="message"></p>
+                    </div>
+                    <div class="tab-pane" :class="{active:tabIndex==2}">
+                        <table class="table">
+                            <thead>
+                                <th v-for="col in columns" v-text="col"></th>
+                            </thead>
+                            <tbody>
+                                <tr v-for="user in users">
+                                    <td><a :href="getHref(user.Id)" v-text="user.Username"></a></td>
+                                    <td v-text="user.FullName"></td>
+                                    <td v-text="user.Email"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
         <hr />
         <div id="footer">

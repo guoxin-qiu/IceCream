@@ -3,6 +3,7 @@ require(['./libs/require-config'], function () {
         new Vue({
             el: '#content',
             data: {
+                tabIndex: 1,
                 message: 'Welcome to enjoy bonbonniere vue simple sample.',
                 columns: ['Username', 'FullName', 'Email'],
                 users: []
