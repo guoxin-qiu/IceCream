@@ -7,12 +7,27 @@ require(['./libs/require-config'], function () {
                 message: 'Welcome to enjoy bonbonniere vue simple sample.',
                 columns: ['Username', 'FullName', 'Email'],
                 users: [],
-                showModal: false
+                showModal: false,
+                curEditUser: {}
             },
             methods: {
-                getHref: function (id) {
-                    return 'index.html#user-detail?id=' + id;
-                }
+                openEdit: function (id) {
+                    debugger
+                    var _self = this;
+                    ajax.get('/User', {
+                        id: id
+                    }, function (response) {
+                        if (response.Success) {
+                            _self.curEditUser = response.User;
+                            _self.showModal = true;
+
+                        }
+                    });
+                },
+                saveUser: function () {
+                    alert(this.curEditUser.Username + ', ' + this.curEditUser.FullName + ', ' + this.curEditUser.Email);
+                },
+        
             },
             created: function () {
                 var _self = this;
