@@ -19,6 +19,7 @@ require.config({
 
         'header': ['../vue-modules/header'],
         'footer': ['../vue-modules/footer'],
+        'page-template': ['../vue-modules/page-template'],
         'modal': ['../vue-modules/modal'],
     }
 });

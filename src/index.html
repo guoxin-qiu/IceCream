@@ -17,54 +17,48 @@
 </head>
 
 <body>
-    <div class="loading-div">
-        <img alt="loading" class="loading-img" src="images/loading.gif" />
-    </div>
-    <div id="header">
-        <bonbonniere-header></bonbonniere-header>
-    </div>
-    <div class="container body-content">
-        <div id="content">
-            <ul class="nav nav-tabs">
-                <li :class="{active:tabIndex==1}" @click="tabIndex=1"><a href="#welcome">Welcome</a></li>
-                <li :class="{active:tabIndex==2}" @click="tabIndex=2"><a href="#users">Users</a></li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane" :class="{active:tabIndex==1}">
-                    <p v-text="message"></p><br/>
-                    <button id="show-modal" @click="showModal=true">Show Modal</button>
-                    <bonbonniere-modal v-if="showModal" @close="showModal=false">
-                        <h3 slot="modal-header">custom header</h3>
-                        <div slot="modal-body">
-                            <input type="text" v-model="message" />
-                            <p v-text="message"></p>
-                            Something interesting.....<br/> Something interesting.....<br/> Something interesting.....<br/>                            Something interesting.....<br/> Something interesting.....<br/>
-                        </div>
-                        <div slot="modal-footer">
-                            <button type="button" class="btn btn-primary" @click="showModal=false">Save changes</button>
-                        </div>
-                    </bonbonniere-modal>
-                </div>
-                <div class="tab-pane" :class="{active:tabIndex==2}">
-                    <table class="table">
-                        <thead>
-                            <th v-for="col in columns" v-text="col"></th>
-                        </thead>
-                        <tbody>
-                            <tr v-for="user in users">
-                                <td><a :href="getHref(user.Id)" v-text="user.Username"></a></td>
-                                <td v-text="user.FullName"></td>
-                                <td v-text="user.Email"></td>
-                            </tr>
-                        </tbody>
-                    </table>
+    <div id="app">
+        <bonbonniere-page>
+            <div slot="page-content">
+                <ul class="nav nav-tabs">
+                    <li :class="{active:tabIndex==1}" @click="tabIndex=1">
+                        <a href="#welcome">Welcome</a></li>
+                    <li :class="{active:tabIndex==2}" @click="tabIndex=2">
+                        <a href="#users">Users</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane" :class="{active:tabIndex==1}">
+                        <p v-text="message"></p><br/>
+                        <button id="show-modal" @click="showModal=true">Show Modal</button>
+                        <bonbonniere-modal v-if="showModal" @close="showModal=false">
+                            <h3 slot="modal-header">custom header</h3>
+                            <div slot="modal-body">
+                                <input type="text" v-model="message" />
+                                <p v-text="message"></p>
+                                Something interesting.....<br/> Something interesting.....<br/> Something interesting.....<br/>                                Something interesting.....<br/> Something interesting.....<br/>
+                            </div>
+                            <div slot="modal-footer">
+                                <button type="button" class="btn btn-primary" @click="showModal=false">Save changes</button>
+                            </div>
+                        </bonbonniere-modal>
+                    </div>
+                    <div class="tab-pane" :class="{active:tabIndex==2}">
+                        <table class="table">
+                            <thead>
+                                <th v-for="col in columns" v-text="col"></th>
+                            </thead>
+                            <tbody>
+                                <tr v-for="user in users">
+                                    <td><a :href="getHref(user.Id)" v-text="user.Username"></a></td>
+                                    <td v-text="user.FullName"></td>
+                                    <td v-text="user.Email"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
-        <hr />
-        <div id="footer">
-            <bonbonniere-footer></bonbonniere-footer>
-        </div>
+        </bonbonniere-page>
     </div>
     <script data-main="js/index.js" src="vendor/requirejs/dist/require.js"></script>
 </body>
