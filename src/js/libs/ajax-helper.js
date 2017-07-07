@@ -37,6 +37,7 @@ define(['jquery', 'ajax-mock'], function ($) {
                         fnSuccess(data);
                     } catch (e) {
                         alert("运行过程中出现未知异常");
+                        console.log(e);
                     }
                 }
             },
