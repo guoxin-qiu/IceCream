@@ -19,5 +19,6 @@ require.config({
 
         'header': ['../vue-modules/header'],
         'footer': ['../vue-modules/footer'],
+        'modal': ['../vue-modules/modal'],
     }
 });

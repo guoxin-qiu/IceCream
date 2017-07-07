@@ -1,9 +1,5 @@
 require(['./libs/require-config'], function () {
-    require(['vue', 'ajax', 'header', 'footer'], function (Vue, ajax) {
-        Vue.component('modal',{
-            template: '#modal-template'
-        });
-
+    require(['vue', 'ajax', 'header', 'footer', 'modal'], function (Vue, ajax) {
         new Vue({
             el: '#content',
             data: {
