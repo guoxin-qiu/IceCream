@@ -10,7 +10,7 @@ define(['vue', 'auth-storage', 'ajax'], function (Vue, auth, ajax) {
         template: ' \
             <div>\
                 <div class="loading-div">\
-                    <img alt="loading" class="loading-img" src="images/loading.gif" />\
+                    <img alt="loading" class="loading-img" src="../images/loading.gif" />\
                 </div>\
                 <div name="page-header"> \
                     <nav class="navbar navbar-inverse navbar-fixed-top">\
@@ -39,7 +39,7 @@ define(['vue', 'auth-storage', 'ajax'], function (Vue, auth, ajax) {
         methods: {
             logoff: function () {
                 auth.removeUserInfo();
-                window.location.href = 'login.html';
+                window.location.href = '../login.html';
             }
         },
         created: function(){
@@ -52,7 +52,7 @@ define(['vue', 'auth-storage', 'ajax'], function (Vue, auth, ajax) {
         },
         beforeCreate() {
             if (!auth.getUserInfo().username) {
-                window.location.href = 'login.html';
+                window.location.href = '../login.html';
             }
         }
     });

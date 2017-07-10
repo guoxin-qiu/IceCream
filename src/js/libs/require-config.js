@@ -1,5 +1,5 @@
 require.config({
-    baseUrl: 'js/libs',
+    baseUrl: '/demo/js/libs',
     shim: {
         'vue': {
             exports: 'vue'

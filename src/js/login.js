@@ -21,7 +21,7 @@ require(['./libs/require-config'], function () {
                     }, function (response) {
                         if (response.LoginSuccess) {
                             storage.setUserInfo(response.UserInfo);
-                            window.location.href = 'index.html';
+                            window.location.href = 'pages/index.html';
                         } else {
                             _self.message = '用户名或密码错误，请重新输入';
                         }

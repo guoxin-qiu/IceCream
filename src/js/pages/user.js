@@ -1,4 +1,4 @@
-require(['./libs/require-config'], function () {
+require(['../libs/require-config'], function () {
     require(['vue', 'ajax', 'page-template', 'modal'], function (Vue, ajax) {
         new Vue({
             el: '#app',

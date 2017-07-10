@@ -1,4 +1,4 @@
-require(['./libs/require-config'], function () {
+require(['../libs/require-config'], function () {
     require(['vue', 'page-template'], function (Vue) {
         new Vue({
             el: '#app',
