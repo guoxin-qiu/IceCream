@@ -32,7 +32,7 @@ define(['vue', 'auth-storage', 'ajax'], function (Vue, auth, ajax) {
                 <div class="container body-content">\
                     <slot name="page-content"></slot>\
                 </div>\
-                <div name="page-footer">\
+                <div name="page-footer" class="text-center">\
                     <footer><p v-html="footerMessage"></p></footer>\
                 </div>\
             </div>',
