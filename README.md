@@ -9,3 +9,4 @@
 - [linqjs](https://github.com/mihaifm/linq)
 - [linqjs-amd](https://github.com/lukax/linqjs-amd)
 - [Vue Demo](http://www.cnblogs.com/rlann/p/6765152.html)
+- [CSS Loading](https://github.com/tobiasahlin/SpinKit)

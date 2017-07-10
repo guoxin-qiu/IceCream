@@ -10,7 +10,10 @@ define(['vue', 'auth-storage', 'ajax'], function (Vue, auth, ajax) {
         template: ' \
             <div>\
                 <div class="loading-div">\
-                    <img alt="loading" class="loading-img" src="../images/loading.gif" />\
+                    <div class="sk-chasing-dots">\
+                        <div class="sk-child sk-dot1"></div>\
+                        <div class="sk-child sk-dot2"></div>\
+                    </div>\
                 </div>\
                 <div name="page-header"> \
                     <nav class="navbar navbar-inverse navbar-fixed-top">\
