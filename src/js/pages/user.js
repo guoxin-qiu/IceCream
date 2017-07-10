@@ -11,7 +11,6 @@ require(['../libs/require-config'], function () {
                 searchText: '',
                 isNew: false,
                 isEditing: false,
-                viewDataLoaded: false
             },
             methods: {
                 search: function () {
@@ -35,7 +34,6 @@ require(['../libs/require-config'], function () {
                         if (response.Success) {
                             _self.curUser = response.User;
                             _self.originalUser = _self.deepCopy(response.User);
-                            _self.viewDataLoaded = true;
                         }
                     });
                 },
@@ -90,12 +88,10 @@ require(['../libs/require-config'], function () {
                 openModalNew: function () {
                     this.isNew = true;
                     this.isEditing = true;
-                    this.viewDataLoaded = true;
                     this.showModal = true;
                 },
                 openModalView: function () {
                     this.isEditing = false;
-                    this.viewDataLoaded = false;
                     this.isNew = false;
                     this.showModal = true;
                 },
