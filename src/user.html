@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="css/site.css">
+    <style>
+        .modal-content {
+            width: 700px;
+        }
+    </style>
+    <title>用户管理 - Bonbonniere</title>
+</head>
+
+<body>
+    <div id="app">
+        <bonbonniere-page>
+            <div slot="page-content">
+                <table class="table">
+                    <thead>
+                        <th v-for="col in columns" v-text="col"></th>
+                    </thead>
+                    <tbody>
+                        <tr v-for="user in users">
+                            <td><a @click="openEdit(user.Id)" v-text="user.Username"></a></td>
+                            <td v-text="user.FullName"></td>
+                            <td v-text="user.Email"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <bonbonniere-modal v-if="showModal" @close="showModal=false">
+                    <h3 slot="modal-header">查看用户信息</h3>
+                    <div slot="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="user-id" class="control-label">Id:</label>
+                                <input type="text" class="form-control" id="user-id" readonly v-model="curEditUser.Id">
+                            </div>
+                            <div class="form-group">
+                                <label for="user-username" class="control-label">Username:</label>
+                                <input type="text" class="form-control" id="user-username" readonly v-model="curEditUser.Username">
+                            </div>
+                            <div class="form-group">
+                                <label for="user-fullname" class="control-label">FullName:</label>
+                                <input type="text" class="form-control" id="user-fullname" readonly v-model="curEditUser.FullName">
+                            </div>
+                            <div class="form-group">
+                                <label for="user-email" class="control-label">Email:</label>
+                                <input type="text" class="form-control" id="user-email" readonly v-model="curEditUser.Email">
+                            </div>
+                        </form>
+                    </div>
+                    <div slot="modal-footer"></div>
+                </bonbonniere-modal>
+            </div>
+        </bonbonniere-page>
+    </div>
+    <script data-main="js/user" src="vendor/requirejs/dist/require.js"></script>
+</body>
+
+</html>

@@ -8,11 +8,6 @@
     <link href="favicon.ico" rel="shortcut icon">
     <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="css/site.css">
-    <style>
-        .modal-content {
-            width: 700px;
-        }
-    </style>
     <title>首页 - Bonbonniere</title>
 </head>
 
@@ -24,49 +19,17 @@
                     <li :class="{active:tabIndex==1}" @click="tabIndex=1">
                         <a href="javascript:;">Welcome</a></li>
                     <li :class="{active:tabIndex==2}" @click="tabIndex=2">
-                        <a href="javascript:;">Users</a></li>
+                        <a href="javascript:;">Welcome2</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane" :class="{active:tabIndex==1}">
                         <p v-text="message"></p><br/>
                     </div>
                     <div class="tab-pane" :class="{active:tabIndex==2}">
-                        <table class="table">
-                            <thead>
-                                <th v-for="col in columns" v-text="col"></th>
-                            </thead>
-                            <tbody>
-                                <tr v-for="user in users">
-                                    <td><a @click="openEdit(user.Id)" v-text="user.Username"></a></td>
-                                    <td v-text="user.FullName"></td>
-                                    <td v-text="user.Email"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <bonbonniere-modal v-if="showModal" @close="showModal=false">
-                            <h3 slot="modal-header">查看用户信息</h3>
-                            <div slot="modal-body">
-                                <form>
-                                    <div class="form-group">
-                                        <label for="user-id" class="control-label">Id:</label>
-                                        <input type="text" class="form-control" id="user-id" readonly v-model="curEditUser.Id">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="user-username" class="control-label">Username:</label>
-                                        <input type="text" class="form-control" id="user-username" readonly v-model="curEditUser.Username">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="user-fullname" class="control-label">FullName:</label>
-                                        <input type="text" class="form-control" id="user-fullname" readonly v-model="curEditUser.FullName">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="user-email" class="control-label">Email:</label>
-                                        <input type="text" class="form-control" id="user-email" readonly v-model="curEditUser.Email">
-                                    </div>
-                                </form>
-                            </div>
-                            <div slot="modal-footer"></div>
-                        </bonbonniere-modal>
+                        <div class="tab-pane" :class="{active:tabIndex==1}">
+                        <p v-text="message"></p><br/>
+                        <p>One more time.</p>
+                    </div>
                     </div>
                 </div>
             </div>
