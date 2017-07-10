@@ -11,12 +11,10 @@ define(['jquery', 'ajax-mock'], function ($) {
             cache: false,
             timeout: 30000,
             beforeSend: function () {
-                $(".loading-div").show();
-                $(".loading-img").delay(2000).show(0);
+                $(".loading-div").delay(2000).show(0);
             },
             success: function (data) {
-                $(".loading-div").hide();
-                $(".loading-img").stop().hide();
+                $(".loading-div").stop().hide();
 
                 if (data.Success + "" === "undefined" && data.Success === false) {
                     var statusCode = data.StatusCode || 0;
@@ -42,8 +40,7 @@ define(['jquery', 'ajax-mock'], function ($) {
                 }
             },
             error: function (xhr, errorType, error) {
-                $(".loading-div").hide();
-                $(".loading-img").stop().hide();
+                $(".loading-div").stop().hide();
 
                 if (errorType === 'timeout') {
                     alert("访问超时");
