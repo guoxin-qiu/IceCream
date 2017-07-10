@@ -22,14 +22,26 @@ define([], function () {
         };
 
         return {
-            add: function (item) {
-                let list = this.getAll();
+            getMaxId: function (list) {
                 let maxId = 1;
                 for (let i = 0; i < list.length; i++) {
                     maxId = maxId > list[i].Id ? maxId : list[i].Id;
                 }
-                item.Id = maxId + 1;
+                return maxId;
+            },
+            add: function (item) {
+                let list = this.getAll();
+                item.Id = getMaxId(list) + 1;
                 list.push(item);
+                _setStorage(list);
+            },
+            addRange: function (itemArray) {
+                let list = this.getAll();
+                let newId = this.getMaxId(list) + 1;
+                for (let i = 0; i < itemArray.length; i++) {
+                    itemArray[i].Id = newId + i;
+                    list.push(itemArray[i]);
+                }
                 _setStorage(list);
             },
             update: function (id, itemForUpdate) {
