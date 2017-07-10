@@ -7,6 +7,7 @@ require(['../libs/require-config'], function () {
                 users: [],
                 showModal: false,
                 curUser: {},
+                originalUser: {},
                 searchText: '',
                 isNew: false,
                 isEditing: false,
@@ -33,13 +34,14 @@ require(['../libs/require-config'], function () {
                     }, function (response) {
                         if (response.Success) {
                             _self.curUser = response.User;
+                            _self.originalUser = _self.deepCopy(response.User);
                             _self.viewDataLoaded = true;
                         }
                     });
                 },
                 addUser: function () {
                     this.curUser = {};
-                    this.openModalNew();                    
+                    this.openModalNew();
                 },
                 editUser: function () {
                     this.isEditing = true;
@@ -47,8 +49,10 @@ require(['../libs/require-config'], function () {
                 cancelEditUser: function () {
                     if (!this.curUser.Id) {
                         this.closeModal();
+                    } else {
+                        this.curUser = this.deepCopy(this.originalUser, this.curUser);
+                        this.isEditing = false;
                     }
-                    this.isEditing = false;
                 },
                 saveUser: function () {
                     var _self = this;
@@ -83,21 +87,35 @@ require(['../libs/require-config'], function () {
                         });
                     }
                 },
-                openModalNew: function(){
+                openModalNew: function () {
                     this.isNew = true;
                     this.isEditing = true;
                     this.viewDataLoaded = true;
                     this.showModal = true;
                 },
-                openModalView: function(){
+                openModalView: function () {
                     this.isEditing = false;
                     this.viewDataLoaded = false;
                     this.isNew = false;
                     this.showModal = true;
                 },
-                closeModal: function(){
+                closeModal: function () {
                     this.showModal = false;
                     this.search();
+                },
+                deepCopy: function (p, c) {
+                    c = c || {};
+                    for (var i in p) {
+                        if (p.hasOwnProperty(i)) {
+                            if (typeof p[i] === 'object') {
+                                c[i] = Array.isArray(p[i]) ? [] : {};
+                                this.deepCopy(p[i], c[i]);
+                            } else {
+                                c[i] = p[i];
+                            }
+                        }
+                    }
+                    return c;
                 }
             },
             created: function () {
