@@ -24,11 +24,11 @@ define([], function () {
         return {
             add: function (item) {
                 let list = this.getAll();
+                let maxId = 1;
                 for (let i = 0; i < list.length; i++) {
-                    if (list[i].Id === item.Id) {
-                        throw new Error('Duplicate Id with ' + item.Id);
-                    }
+                    maxId = maxId > list[i].Id ? maxId : list[i].Id;
                 }
+                item.Id = maxId + 1;
                 list.push(item);
                 _setStorage(list);
             },
@@ -37,17 +37,17 @@ define([], function () {
                 for (let i = 0; i < list.length; i++) {
                     if (list[i].Id === id) {
                         list[i] = itemForUpdate;
-                        return false;
+                        break;
                     }
                 }
                 _setStorage(list);
             },
             delete: function (id) {
                 let list = this.getAll();
-                for (let i = 0; i < list.count; i++) {
+                for (let i = 0; i < list.length; i++) {
                     if (list[i].Id === id) {
-                        list.split(i, 1);
-                        return false;
+                        list.splice(i, 1);
+                        break;
                     }
                 }
                 _setStorage(list);
@@ -63,6 +63,6 @@ define([], function () {
 
     return {
         User: new Repository('database-user', 'users'),
-        Menu: new Repository('database-menu','menus')
+        Menu: new Repository('database-menu', 'menus')
     }
 })

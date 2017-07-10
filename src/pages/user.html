@@ -20,41 +20,61 @@
     <div id="app">
         <bonbonniere-page>
             <div slot="page-content">
-                <table class="table">
-                    <thead>
-                        <th v-for="col in columns" v-text="col"></th>
-                    </thead>
-                    <tbody>
-                        <tr v-for="user in users">
-                            <td><a @click="openEdit(user.Id)" v-text="user.Username"></a></td>
-                            <td v-text="user.FullName"></td>
-                            <td v-text="user.Email"></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <bonbonniere-modal v-if="showModal" @close="showModal=false">
-                    <h3 slot="modal-header">查看用户信息</h3>
-                    <div slot="modal-body">
-                        <form>
-                            <div class="form-group">
-                                <label for="user-id" class="control-label">Id:</label>
-                                <input type="text" class="form-control" id="user-id" readonly v-model="curEditUser.Id">
-                            </div>
-                            <div class="form-group">
-                                <label for="user-username" class="control-label">Username:</label>
-                                <input type="text" class="form-control" id="user-username" readonly v-model="curEditUser.Username">
-                            </div>
-                            <div class="form-group">
-                                <label for="user-fullname" class="control-label">FullName:</label>
-                                <input type="text" class="form-control" id="user-fullname" readonly v-model="curEditUser.FullName">
-                            </div>
-                            <div class="form-group">
-                                <label for="user-email" class="control-label">Email:</label>
-                                <input type="text" class="form-control" id="user-email" readonly v-model="curEditUser.Email">
-                            </div>
-                        </form>
+                <div class="col-md-4"></div>
+                <div class="input-group col-md-4" style="margin:20px 0;">
+                    <input type="text" class="form-control" v-model="searchText" placeholder="请输入关键字" />
+                    <span class="input-group-btn">  
+                        <button class="btn btn-info btn-search" @click="search">查找</button>  
+                    </span>
+                </div>
+                <div class="col-md-4"></div>
+                <div class="panel panel-default">
+                    <!--<div class="panel-heading"></div>-->
+                    <div v-if="users.length>0" class="table-responsive">
+                        <table class="table table-hover">
+                            <caption>
+                                <span>用户列表</span>
+                                <button @click="addUser" class="btn btn-info">＋添加</button>
+                            </caption>
+                            <col style="width:30%;" />
+                            <col style="width:30%;" />
+                            <col style="width:30%;" />
+                            <col style="width:10%;" />
+                            <thead>
+                                <th v-for="col in columns" v-text="col"></th>
+                                <th></th>
+                            </thead>
+                            <tbody>
+                                <tr v-for="user in users">
+                                    <td v-for="col in columns" v-text="user[col]"></td>
+                                    <td>
+                                        <span class="input-group-btn">  
+                                        <button class="btn btn-info" @click="viewUser(user.Id)">查看详情</button>  
+                                    </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div slot="modal-footer"></div>
+                    <div v-else class="alert">暂无数据！</div>
+                </div>
+                <bonbonniere-modal v-if="showModal" @close="showModal=false">
+                    <h3 slot="modal-header">用户信息</h3>
+                    <div slot="modal-body">
+                        <div class="form-group" v-for="col in columns">
+                            <label class="control-label" v-text="col+':'"></label>
+                            <input v-if="isNew || (isEditing && col!=='Username')" v-model="curUser[col]" type="text" class="form-control" />
+                            <span v-else v-text="curUser[col]" class="form-control" style="background-color:#eee;"></span>
+                        </div>
+                    </div>
+                    <div slot="modal-footer">
+                        <span class="input-group-btn" v-show="viewDataLoaded">  
+                        <button type="button" v-show="!isEditing" @click="editUser" class="btn btn-primary">编辑</button>
+                        <button type="button" v-show="isEditing" @click="saveUser" class="btn btn-primary">保存</button>
+                        <button type="button" v-show="isEditing" @click="cancelEditUser" class="btn btn-primary">取消</button>
+                        <button type="button" v-show="!isEditing" @click="delUser" class="btn btn-primary">删除</button>
+                        </span>
+                    </div>
                 </bonbonniere-modal>
             </div>
         </bonbonniere-page>
