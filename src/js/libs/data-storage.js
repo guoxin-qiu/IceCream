@@ -5,7 +5,7 @@ define([], function () {
         let storage = window.localStorage;
 
         let _getStorage = function () {
-            var listStr = storage.getItem(storageKey);
+            let listStr = storage.getItem(storageKey);
             if (!listStr) {
                 return JSON.parse('{"' + jsonKey + '":[]}');
             }
@@ -62,6 +62,7 @@ define([], function () {
     }
 
     return {
-        User: new Repository('database-user', 'users')
+        User: new Repository('database-user', 'users'),
+        Menu: new Repository('database-menu','menus')
     }
 })

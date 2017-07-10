@@ -27,7 +27,6 @@ define(['jquery', 'mockjax', 'data-storage', 'database-init', 'linqjs'], functio
         url: '/User',
         response: function (settings) {
             if (settings.data && settings.data.id) {
-                debugger
                 var user = linqjs.From(db.User.getAll()).FirstOrDefault(null, function (u) {
                     return u.Id === settings.data.id;
                 });
@@ -43,6 +42,18 @@ define(['jquery', 'mockjax', 'data-storage', 'database-init', 'linqjs'], functio
                     Message: '',
                     Users: users
                 }
+            }
+        }
+    });
+
+    mockjax({
+        url: '/Menu',
+        response: function (settings) {
+            var menus = db.Menu.getAll();
+            this.responseText = {
+                Success: true,
+                Message: '',
+                Menus: menus
             }
         }
     });

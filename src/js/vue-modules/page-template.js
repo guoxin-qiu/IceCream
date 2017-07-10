@@ -1,12 +1,9 @@
-define(['vue', 'auth-storage'], function (Vue, storage) {
+define(['vue', 'auth-storage', 'ajax'], function (Vue, auth, ajax) {
     Vue.component('bonbonniere-page', {
         data: function () {
             return {
-                menus: [{
-                    name: "首页",
-                    url: "./index.html",
-                }],
-                fullName: storage.getUserInfo().fullName,
+                menus: [],
+                fullName: auth.getUserInfo().fullName,
                 footerMessage: '&copy; 2017 - Bonbonniere'
             }
         },
@@ -22,7 +19,7 @@ define(['vue', 'auth-storage'], function (Vue, storage) {
                             <div class="navbar-collapse collapse" id="navigation-menu">\
                                 <ul class="nav navbar-nav">\
                                     <li v-for="menu in menus">\
-                                        <a :href="menu.url" v-text="menu.name"></a>\
+                                        <a :href="menu.Url" v-text="menu.Text"></a>\
                                     </li></ul>\
                                 <ul class="nav navbar-nav navbar-right">\
                                     <li><a v-text="fullName"></a></li>\
@@ -41,12 +38,20 @@ define(['vue', 'auth-storage'], function (Vue, storage) {
             </div>',
         methods: {
             logoff: function () {
-                storage.removeUserInfo();
+                auth.removeUserInfo();
                 window.location.href = 'login.html';
             }
         },
+        created: function(){
+            var _self = this;
+                ajax.get('/Menu', null, function (response) {
+                    if (response.Success) {
+                        _self.$data.menus = response.Menus;
+                    }
+                });
+        },
         beforeCreate() {
-            if (!storage.getUserInfo().username) {
+            if (!auth.getUserInfo().username) {
                 window.location.href = 'login.html';
             }
         }

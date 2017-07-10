@@ -1,6 +1,7 @@
 define(['data-storage'], function (database) {
     (function () {
         initUser();
+        initMenu();
     })();
 
     function initUser() {
@@ -28,6 +29,27 @@ define(['data-storage'], function (database) {
             Username: 'test2',
             FullName: 'WangWu',
             Email: 'test2@sydq.cn'
+        });
+    }
+    function initMenu(){
+        database.Menu.deleteAll();
+        database.Menu.add({
+            Id: 1,
+            Text: '主页',
+            Url: './index.html',
+            IsActive: true
+        });
+        database.Menu.add({
+            Id: 2,
+            Text: '用户管理',
+            Url: './user.html',
+            IsActive: true
+        });
+        database.Menu.add({
+            Id: 99,
+            Text: 'API',
+            Url: './api.html',
+            IsActive: true
         });
     }
 });
