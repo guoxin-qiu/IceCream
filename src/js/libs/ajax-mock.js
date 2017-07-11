@@ -7,7 +7,7 @@ define(['jquery', 'mockjax', 'data-storage', 'database-init', 'linqjs'], functio
         type: 'GET',
         // responseTime: responseTime,
         response: function (settings) {
-            var user = linqjs.From(db.User.getAll()).FirstOrDefault(null, function (x) {
+            let user = linqjs.From(db.User.getAll()).FirstOrDefault(null, function (x) {
                 return x.Username === settings.data.username
             });
             if (user) {
@@ -29,8 +29,8 @@ define(['jquery', 'mockjax', 'data-storage', 'database-init', 'linqjs'], functio
         // responseTime: [4000,6000],
         type: 'GET',
         response: function (settings) {
-            if (settings.data && settings.data.id) {
-                var user = linqjs.From(db.User.getAll()).FirstOrDefault(null, function (u) {
+            if (settings.data.id) {
+                let user = linqjs.From(db.User.getAll()).FirstOrDefault(null, function (u) {
                     return u.Id === settings.data.id;
                 });
                 this.responseText = {
@@ -39,11 +39,13 @@ define(['jquery', 'mockjax', 'data-storage', 'database-init', 'linqjs'], functio
                     User: user
                 }
             } else {
-                var users = db.User.getAll();
+                let users = db.User.getAll();
+                let totalPageCount = Math.ceil(users.length / settings.data.pageSize) || 1;
                 this.responseText = {
                     Success: true,
                     Message: '',
-                    Users: users
+                    Users: linqjs.From(users).Take(settings.data.pageSize).ToArray(),
+                    TotalPageCount: totalPageCount
                 }
             }
         }
@@ -89,25 +91,23 @@ define(['jquery', 'mockjax', 'data-storage', 'database-init', 'linqjs'], functio
         url: '/User/Search',
         type: 'GET',
         response: function (settings) {
-            if (settings.data && settings.data.key) {
-                var users = linqjs.From(db.User.getAll())
-                    .Where(function (u) {
-                        var lowerKey = settings.data.key.toLowerCase();
-                        return u.Username.toLowerCase().indexOf(lowerKey) > -1 ||
-                            u.FullName.toLowerCase().indexOf(lowerKey) > -1 ||
-                            u.Email.toLowerCase().indexOf(lowerKey) > -1;
-                    }).ToArray();
-                this.responseText = {
-                    Success: true,
-                    Message: '',
-                    Users: users
-                }
-            } else {
-                this.responseText = {
-                    Success: true,
-                    Message: '',
-                    Users: db.User.getAll()
-                }
+            let users = db.User.getAll();
+            let totalPageCount = 1;
+            let allusers = linqjs.From(db.User.getAll())
+                .Where(function (u) {
+                    var lowerKey = settings.data.key.toLowerCase();
+                    return u.Username.toLowerCase().indexOf(lowerKey) > -1 ||
+                        u.FullName.toLowerCase().indexOf(lowerKey) > -1 ||
+                        u.Email.toLowerCase().indexOf(lowerKey) > -1;
+                });
+            totalPageCount = Math.ceil(allusers.Count() / settings.data.pageSize) || 1;
+            users = allusers.Skip(settings.data.pageSize * (settings.data.pageIndex-1)).Take(settings.data.pageSize).ToArray();
+
+            this.responseText = {
+                Success: true,
+                Message: '',
+                Users: users,
+                TotalPageCount: totalPageCount
             }
         }
     });

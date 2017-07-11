@@ -21,5 +21,6 @@ require.config({
         'footer': ['../vue-modules/footer'],
         'page-template': ['../vue-modules/page-template'],
         'modal': ['../vue-modules/modal'],
+        'pagination': ['../vue-modules/pagination'],
     }
 });

@@ -1,5 +1,5 @@
 require(['../libs/require-config'], function () {
-    require(['vue', 'ajax', 'page-template', 'modal'], function (Vue, ajax) {
+    require(['vue', 'ajax', 'page-template', 'pagination', 'modal'], function (Vue, ajax) {
         new Vue({
             el: '#app',
             data: {
@@ -11,15 +11,20 @@ require(['../libs/require-config'], function () {
                 searchText: '',
                 isNew: false,
                 isEditing: false,
+                totalPageCount: 1,
+                pageSize: 2
             },
             methods: {
-                search: function () {
+                search: function (pageIndex) {
                     var _self = this;
                     ajax.get('/User/Search', {
-                        key: _self.searchText
+                        key: _self.searchText,
+                        pageIndex: pageIndex,
+                        pageSize: this.pageSize
                     }, function (response) {
                         if (response.Success) {
                             _self.users = response.Users;
+                            _self.totalPageCount = response.TotalPageCount;
                         }
                     });
                 },
@@ -116,9 +121,12 @@ require(['../libs/require-config'], function () {
             },
             created: function () {
                 var _self = this;
-                ajax.get('/User', null, function (response) {
+                ajax.get('/User', {
+                    pageSize: this.pageSize
+                }, function (response) {
                     if (response.Success) {
                         _self.$data.users = response.Users;
+                        _self.$data.totalPageCount = response.TotalPageCount;
                     }
                 });
             }
