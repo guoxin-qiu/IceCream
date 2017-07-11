@@ -18,23 +18,24 @@ require(['../libs/require-config'], function () {
                 pageIndex: 1
             },
             methods: {
-                _query: function () {
+                _query: function (pageIndex) {
+                    pageIndex = pageIndex || this.pageIndex;
                     var _self = this;
-                    ajax.get('/User/Search', {
+                    ajax.get('/User', {
                         key: _self.searchText,
-                        pageIndex: this.pageIndex,
+                        pageIndex: pageIndex,
                         pageSize: this.pageSize
                     }, function (response) {
                         if (response.Success) {
                             _self.users = response.Users;
                             _self.totalPageCount = response.TotalPageCount;
+                            _self.pageIndex = pageIndex;
                         }
                     });
                 },
                 search: function () {
-                    this.pageIndex = 1;
                     this.searchText = this.searchTextLive;
-                    this._query();
+                    this._query(1);
                 },
                 viewUser: function (id) {
                     var _self = this;
@@ -110,7 +111,7 @@ require(['../libs/require-config'], function () {
                 },
                 closeModal: function () {
                     this.showModal = false;
-                    this.search();
+                    this._query();
                 },
                 deepCopy: function (p, c) {
                     c = c || {};

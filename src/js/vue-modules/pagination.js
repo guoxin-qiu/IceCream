@@ -48,8 +48,8 @@ define(['vue', 'ajax'], function (Vue, ajax) {
         methods: {
             goto: function (index) {
                 if (index < 1 || index > this.totalPageCount || index == this.curPageIndex) return;
-                this.$emit('update:curPageIndex', index);
-                this.searchMethod();
+                this.searchMethod(index);
+                this.$emit('update:curPageIndex', index);                
             }
         }
     });

@@ -40,11 +40,24 @@ define(['jquery', 'mockjax', 'data-storage', 'database-init', 'linqjs'], functio
                 }
             } else {
                 let users = db.User.getAll();
-                let totalPageCount = Math.ceil(users.length / settings.data.pageSize) || 1;
+                let totalPageCount = 1;
+                let allusers = linqjs.From(db.User.getAll())
+                    .Where(function (u) {
+                        var lowerKey = settings.data.key.toLowerCase();
+                        return lowerKey == '' ||
+                            u.Username.toLowerCase().indexOf(lowerKey) > -1 ||
+                            u.FullName.toLowerCase().indexOf(lowerKey) > -1 ||
+                            u.Email.toLowerCase().indexOf(lowerKey) > -1;
+                    });
+                totalPageCount = Math.ceil(allusers.Count() / settings.data.pageSize) || 1;
+                users = allusers.OrderBy(function (u) {
+                    return u.Username;
+                }).Skip(settings.data.pageSize * (settings.data.pageIndex - 1)).Take(settings.data.pageSize).ToArray();
+
                 this.responseText = {
                     Success: true,
                     Message: '',
-                    Users: linqjs.From(users).Take(settings.data.pageSize).ToArray(),
+                    Users: users,
                     TotalPageCount: totalPageCount
                 }
             }
@@ -83,31 +96,6 @@ define(['jquery', 'mockjax', 'data-storage', 'database-init', 'linqjs'], functio
             this.responseText = {
                 Success: true,
                 Message: ''
-            }
-        }
-    });
-
-    mockjax({
-        url: '/User/Search',
-        type: 'GET',
-        response: function (settings) {
-            let users = db.User.getAll();
-            let totalPageCount = 1;
-            let allusers = linqjs.From(db.User.getAll())
-                .Where(function (u) {
-                    var lowerKey = settings.data.key.toLowerCase();
-                    return u.Username.toLowerCase().indexOf(lowerKey) > -1 ||
-                        u.FullName.toLowerCase().indexOf(lowerKey) > -1 ||
-                        u.Email.toLowerCase().indexOf(lowerKey) > -1;
-                });
-            totalPageCount = Math.ceil(allusers.Count() / settings.data.pageSize) || 1;
-            users = allusers.Skip(settings.data.pageSize * (settings.data.pageIndex-1)).Take(settings.data.pageSize).ToArray();
-
-            this.responseText = {
-                Success: true,
-                Message: '',
-                Users: users,
-                TotalPageCount: totalPageCount
             }
         }
     });
