@@ -31,7 +31,7 @@ define([], function () {
             },
             add: function (item) {
                 let list = this.getAll();
-                item.Id = getMaxId(list) + 1;
+                item.Id = this.getMaxId(list) + 1;
                 list.push(item);
                 _setStorage(list);
             },
