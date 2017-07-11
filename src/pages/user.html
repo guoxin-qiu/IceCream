@@ -22,9 +22,9 @@
             <div slot="page-content">
                 <div class="col-md-4"></div>
                 <div class="input-group col-md-4" style="margin:20px 0;">
-                    <input type="text" v-model="searchText" @keyup.enter="search" class="form-control" placeholder="请输入关键字" />
+                    <input type="text" v-model="searchTextLive" @keyup.enter="search" class="form-control" placeholder="请输入关键字" />
                     <span class="input-group-btn">  
-                        <button class="btn btn-info btn-search" @click="search(1)">查找</button> 
+                        <button class="btn btn-info btn-search" @click="search">查找</button> 
                         <button @click="addUser" class="btn btn-info" style="margin-left:3px;">＋添加</button>
                     </span>
                 </div>
@@ -53,14 +53,7 @@
                         <tfoot>
                             <tr>
                                 <td colspan="4" class="text-right">
-                                    <!--<ul class="pagination">
-                                        <li><a href="">&lt;&lt;</a></li>
-                                        <li><a href="">&lt;</a></li>
-                                        <li v-for="i in 5"><a href="" v-text="i"></a></li>
-                                        <li><a href="">&gt;</a></li>
-                                        <li><a href="">&gt;&gt;</a></li>
-                                    </ul>-->
-                                    <bonbonniere-pagination :total-page-count="totalPageCount" :search-method="search"></bonbonniere-pagination>
+                                    <bonbonniere-pagination :cur-page-index.sync="pageIndex" :total-page-count="totalPageCount" :search-method="_query"></bonbonniere-pagination>
                                 </td>
                             </tr>
                         </tfoot>

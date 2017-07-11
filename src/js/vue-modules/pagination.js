@@ -1,19 +1,22 @@
 define(['vue', 'ajax'], function (Vue, ajax) {
     Vue.component('bonbonniere-pagination', {
         props: {
-            totalPageCount:{
+            totalPageCount: {
                 type: Number,
                 required: true
             },
-            searchMethod:{
+            searchMethod: {
                 type: Function,
                 required: true
+            },
+            curPageIndex: {
+                type: Number,
+                default: 1
             }
         },
         data: function () {
             return {
                 capacity: 5,
-                curPageIndex: 1
             }
         },
         template: ' \
@@ -45,8 +48,8 @@ define(['vue', 'ajax'], function (Vue, ajax) {
         methods: {
             goto: function (index) {
                 if (index < 1 || index > this.totalPageCount || index == this.curPageIndex) return;
-                this.curPageIndex = index;
-                this.searchMethod(this.curPageIndex);
+                this.$emit('update:curPageIndex', index);
+                this.searchMethod();
             }
         }
     });

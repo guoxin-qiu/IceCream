@@ -5,21 +5,24 @@ require(['../libs/require-config'], function () {
             data: {
                 columns: ['Username', 'FullName', 'Email'],
                 users: [],
-                showModal: false,
                 curUser: {},
                 originalUser: {},
-                searchText: '',
+                showModal: false,
                 isNew: false,
                 isEditing: false,
+
+                searchText: '',
+                searchTextLive: '',
                 totalPageCount: 1,
-                pageSize: 2
+                pageSize: 2,
+                pageIndex: 1
             },
             methods: {
-                search: function (pageIndex) {
+                _query: function () {
                     var _self = this;
                     ajax.get('/User/Search', {
                         key: _self.searchText,
-                        pageIndex: pageIndex,
+                        pageIndex: this.pageIndex,
                         pageSize: this.pageSize
                     }, function (response) {
                         if (response.Success) {
@@ -27,6 +30,11 @@ require(['../libs/require-config'], function () {
                             _self.totalPageCount = response.TotalPageCount;
                         }
                     });
+                },
+                search: function () {
+                    this.pageIndex = 1;
+                    this.searchText = this.searchTextLive;
+                    this._query();
                 },
                 viewUser: function (id) {
                     var _self = this;
@@ -120,15 +128,7 @@ require(['../libs/require-config'], function () {
                 }
             },
             created: function () {
-                var _self = this;
-                ajax.get('/User', {
-                    pageSize: this.pageSize
-                }, function (response) {
-                    if (response.Success) {
-                        _self.$data.users = response.Users;
-                        _self.$data.totalPageCount = response.TotalPageCount;
-                    }
-                });
+                this._query();
             }
         });
     });
