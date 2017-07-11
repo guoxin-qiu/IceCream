@@ -13,20 +13,56 @@ define(['data-storage'], function (database) {
                 Email: 'admin@sydq.cn'
             }, {
                 Id: 2,
-                Username: 'denis',
-                FullName: 'Denis',
-                Email: 'denis@sydq.cn'
+                Username: 'guoxin-qiu',
+                FullName: 'Denis Qiu',
+                Email: 'guoxin.qiu@outlook.com'
             }, {
                 Id: 3,
-                Username: 'test1',
-                FullName: 'ZhangSan',
-                Email: 'test1@sydq.cn'
+                Username: 'ood970',
+                FullName: 'Muriel Thodore',
+                Email: 'ood970@126.com'
             },
             {
                 Id: 4,
-                Username: 'test2',
-                FullName: 'WangWu',
-                Email: 'test2@qq.cn'
+                Username: 'ogden',
+                FullName: 'Ogden Raymond',
+                Email: 'ogden@hotmail.com'
+            },
+            {
+                Id: 5,
+                Username: 'branda',
+                FullName: 'Stan Warren',
+                Email: 'branda@sina.com'
+            },
+            {
+                Id: 6,
+                Username: 'michael9001',
+                FullName: 'Michael Wheeler',
+                Email: 'michael888@ibm.com'
+            },
+            {
+                Id: 7,
+                Username: 'bob-god',
+                FullName: 'Ingemar Bob',     
+                Email: 'ck133@trick.cn'
+            },
+            {
+                Id: 8,
+                Username: 'ju00011',
+                FullName: 'Ursula Jessie',
+                Email: 'ju00011@facebook.com'
+            },
+            {
+                Id: 9,
+                Username: 'loveElla',
+                FullName: 'Vito Ella',
+                Email: 'loveElla@love.cn'
+            },
+            {
+                Id: 10,
+                Username: 'one-two-three',
+                FullName: 'Zebulon Albert',
+                Email: 'onetwothree@123.cn'
             }
         ]);
     }
