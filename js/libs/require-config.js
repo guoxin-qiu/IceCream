@@ -1,5 +1,5 @@
 require.config({
-    baseUrl: '/bonbonniere-vue-simple/src/js/libs',
+    baseUrl: '/bonbonniere-vue-simple/js/libs',
     shim: {
         'vue': {
             exports: 'vue'
