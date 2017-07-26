@@ -2,7 +2,7 @@
 
 ## References ##
 
-- [Demo URL](http://localhost/bonbonniere-vue-simple/login.html)
+- [Demo URL](https://guoxin-qiu.github.io/bonbonniere-vue-simple/login.html)
 - [vuejs installation](http://vuejs.org/v2/guide/installation.html)
 - [runoob](http://www.runoob.com/vue2/vue-tutorial.html)
 - [https://unpkg.com/vue/dist/vue.js](https://unpkg.com/vue/dist/vue.js)
