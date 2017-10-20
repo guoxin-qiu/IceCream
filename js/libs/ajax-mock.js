@@ -16,6 +16,10 @@ define(['jquery', 'mockjax', 'data-storage', 'database-init', 'linqjs'], functio
                         LoginSuccess: true,
                         UserInfo: user
                     }
+                }else{
+                    this.responseText = {
+                        LoginSuccess: false
+                    } 
                 }
             } else {
                 this.responseText = {
