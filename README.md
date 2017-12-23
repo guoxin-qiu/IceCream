@@ -1,5 +1,5 @@
-# Simple Vue Sample #
-
+# Ice Cream #
+Focus on simple Vue
 ## References ##
 
 - [Demo URL](https://guoxin-qiu.github.io/bonbonniere-vue-simple/login.html)
